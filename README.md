@@ -1,4 +1,3 @@
-=================================
 Suspension Data
 =================================
 
@@ -31,12 +30,35 @@ Please make sure you have these tools installed:
 
 To get the Suspension Project, follow this steps:
 
-- Clone the repository: `git clone git@github.com:Xanonymous-GitHub/suspension-data.git`
-- Install specific python environment: `pyenv install 3.10`.
-- Change to that version of python locally: `pyenv local 3.10`.
-- Switch to the python environment: `poetry env use "$(pyenv which python3)"`.
-- Install dependencies: `poetry install`.
-- Start the development shell: `poetry shell`.
+- Clone the repository: 
+```bash
+git clone git@github.com:Xanonymous-GitHub/suspension-data.git
+```
+
+- Install specific python environment: 
+```bash
+pyenv install 3.10
+```
+
+- Change to that version of python locally: 
+```bash
+pyenv local 3.10
+```
+
+- Switch to the python environment: 
+```bash
+poetry env use "$(pyenv which python3)"
+```
+
+- Install dependencies: 
+```bash
+poetry install
+```
+
+- Start the development shell: 
+```bash
+poetry shell
+```
 
 Check Typing
 -----
