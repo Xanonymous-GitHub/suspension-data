@@ -43,11 +43,11 @@ overriding_renamed_parameter_count_checks = false
 
 # Use the enum overlay for more precise enum checking. This flag is temporary
 # and will be removed once this behavior is enabled by default.
-use_enum_overlay = false
+use_enum_overlay = true
 
 # Variables initialized as None retain their None binding. This flag is
 # temporary and will be removed once this behavior is enabled by default.
-strict_none_binding = false
+strict_none_binding = true
 
 # Support the third-party fiddle library. This flag is temporary and will be
 # removed once this behavior is enabled by default.
@@ -60,24 +60,25 @@ no_return_any = true
 enable_cached_property = false
 
 # Experimental: Infer precise return types even for invalid function calls.
-precise_return = false
+precise_return = true
 
 # Experimental: Solve unknown types to label with structural types.
-protocols = false
+protocols = true
 
 # Experimental: Only load submodules that are explicitly imported.
-strict_import = false
+strict_import = true
 
 # Experimental: Enable exhaustive checking of function parameter types.
-strict_parameter_checks = false
+strict_parameter_checks = true
 
 # Experimental: Emit errors for comparisons between incompatible primitive
 # types.
-strict_primitive_comparisons = false
+strict_primitive_comparisons = true
 
 # Space-separated list of error names to ignore.
 disable = [
     'pyi-error',
+    'import-error'
 ]
 
 # Don't report errors.
