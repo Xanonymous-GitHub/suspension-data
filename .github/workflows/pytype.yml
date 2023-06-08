@@ -20,10 +20,6 @@ jobs:
     - name: Setup Poetry
       uses: Gr1N/setup-poetry@v8
 
-    - name: Enter Poetry shell
-      run: |
-        source $(poetry env info --path)/bin/activate
-
     - name: Analysing the code with pytype
       run: |
-        pytype $(git ls-files '*.py')
+        poetry run pytype $(git ls-files '*.py')
