@@ -7,6 +7,7 @@ authors = ["Xanonymous <trusaidlin@gmail.com>"]
 [tool.poetry.dependencies]
 python = "3.10.11"
 openai = "^0.27.7"
+pandas = "^2.0.2"
 
 [tool.poetry.dev-dependencies]
 pytype = "^2023.6.2"
