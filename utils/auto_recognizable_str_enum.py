@@ -1,9 +1,9 @@
-from enum import StrEnum
+from enum import Enum
 
 __all__ = ['AutoCheckRecognizableStrEnum']
 
 
-class AutoCheckRecognizableStrEnum(StrEnum):
+class AutoCheckRecognizableStrEnum(Enum):
     @classmethod
     def _missing_(cls, key):
         """
