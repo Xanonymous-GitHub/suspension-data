@@ -1,11 +1,11 @@
 from dataclasses import dataclass
 
-from utils import JsonSerializable
+from utils import JsonSerializable, ValidatableDataClass
 from suspension_data.enums import Gender, SchoolType, EducationProgram, SuspensionReason
 
 
 @dataclass(frozen=True)
-class SuspensionRecord(JsonSerializable):
+class SuspensionRecord(ValidatableDataClass, JsonSerializable):
     gender: Gender
     school_type: SchoolType
     program: EducationProgram
