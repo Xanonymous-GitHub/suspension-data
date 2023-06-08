@@ -88,6 +88,6 @@ class SuspensionCsvDto:
         for row in cleared_csv.itertuples(index=False):
             record = self.__from_row_to_suspension_record(row)
             if record is not None:
-                records.append(self.__from_row_to_suspension_record(row))
+                records.append(record)
 
         return tuple(records)
