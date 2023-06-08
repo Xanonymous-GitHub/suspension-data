@@ -29,7 +29,7 @@ class JsonSerializable(JSONEncoder, metaclass=ABCMeta):
         return dumps(self.__dict__)
 
     @property
-    def to_json_serializable(self) -> dict:
+    def serializable_dict(self) -> dict:
         """
         Provides a dictionary representation of the instance's attributes.
         This method can be utilized for making the object serializable to JSON.
