@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 
 from utils import JsonSerializable
-from enums import Gender, SchoolType, EducationProgram, SuspensionReason
+from suspension_data.enums import Gender, SchoolType, EducationProgram, SuspensionReason
 
 
 @dataclass(frozen=True)
