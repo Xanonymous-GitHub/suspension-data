@@ -57,7 +57,7 @@ class SuspensionCsvDto:
 
         raw_reason: Final[str] = row[self.REASON_POS]
         if SuspensionReason.is_valid(raw_reason):
-            reason: Final[SuspensionReason] = SuspensionReason(raw_reason)
+            reason: SuspensionReason = SuspensionReason(raw_reason)
         else:
             reason: Final[SuspensionReason] = SuspensionReason.OTHER
 
