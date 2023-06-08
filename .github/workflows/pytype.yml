@@ -19,6 +19,10 @@ jobs:
 
     - name: Setup Poetry
       uses: Gr1N/setup-poetry@v8
+      
+    - name: Install dependencies
+      run: |
+        poetry install --no-root
 
     - name: Analysing the code with pytype
       run: |
