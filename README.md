@@ -11,16 +11,6 @@ Objective
 
 The objective of the Suspension Project is to create a user-friendly website that displays student leave reasons data in an easily understandable and visually appealing manner. By organizing the government-provided data, we aim to provide valuable insights into student leave patterns and reasons. The integration of OpenAI's fine-tuned GPT model allows us to make predictions about future data traits changes based on historical patterns.
 
-Technologies Used
------------------
-
-The Suspension Project utilizes the following technologies:
-
-- Vue3: The frontend of the website is built using Vue3, a progressive JavaScript framework for building user interfaces.
-- Python: Data processing is done using Python, a versatile programming language with various libraries for data manipulation and analysis.
-- OpenAI's fine-tune: The GPT model is trained using OpenAI's fine-tune framework, which enables us to fine-tune the model for specific prediction tasks.
-
-
 Usage
 -----
 
@@ -62,7 +52,7 @@ poetry shell
 
 Check Typing
 -----
-- `pytype .`
+- `pytype $(git ls-files '*.py')`
 
 
 License
