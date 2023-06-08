@@ -2,6 +2,8 @@ from abc import ABCMeta
 from dataclasses import dataclass, asdict
 from json import dumps, JSONEncoder
 
+__all__ = ['JsonSerializable']
+
 
 @dataclass(frozen=True)
 class JsonSerializable(JSONEncoder, metaclass=ABCMeta):
