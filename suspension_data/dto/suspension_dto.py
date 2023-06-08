@@ -34,39 +34,34 @@ class SuspensionCsvDto:
         return csv.drop(columns=self.__expect_drop_columns)
 
     def __from_row_to_suspension_record(self, row: tuple) -> Optional[SuspensionRecord]:
-        raw_gender: Final[str] = row[self.GENDER_POS]
-        if Gender.is_valid(raw_gender):
+        if Gender.is_valid(raw_gender := row[self.GENDER_POS]):
             gender: Final[Gender] = Gender(raw_gender)
         else:
             # Filter out the 'total' value.
             return None
 
-        raw_program: Final[str] = row[self.PROGRAM_POS]
-        if EducationProgram.is_valid(raw_program):
+        if EducationProgram.is_valid(raw_program := row[self.PROGRAM_POS]):
             program: Final[EducationProgram] = EducationProgram(raw_program)
         else:
             # Filter out the 'total' value.
             return None
 
-        raw_school_type: Final[str] = row[self.SCHOOL_TYPE_POS]
-        if SchoolType.is_valid(raw_school_type):
+        if SchoolType.is_valid(raw_school_type := row[self.SCHOOL_TYPE_POS]):
             school_type: Final[SchoolType] = SchoolType(raw_school_type)
         else:
             # Filter out the 'total' value.
             return None
 
-        raw_reason: Final[str] = row[self.REASON_POS]
-        if SuspensionReason.is_valid(raw_reason):
+        if SuspensionReason.is_valid(raw_reason := row[self.REASON_POS]):
             reason: SuspensionReason = SuspensionReason(raw_reason)
         else:
             reason: Final[SuspensionReason] = SuspensionReason.OTHER
 
         # For this column, we should remove the last two characters, which are the "00" part.
-        raw_year: Final[str] = row[self.YEAR_POS]
-        if isinstance(raw_year, str):
-            year: Final[int] = int(raw_year[:-2])
+        if isinstance(raw_year := row[self.YEAR_POS], str):
+            year: int = int(raw_year[:-2])
         elif isinstance(raw_year, int):
-            year: Final[int] = raw_year // 100
+            year: int = raw_year // 100
         else:
             year: Final[int] = -1
 
@@ -86,8 +81,7 @@ class SuspensionCsvDto:
 
         records: Final[list[SuspensionRecord]] = list()
         for row in cleared_csv.itertuples(index=False):
-            record = self.__from_row_to_suspension_record(row)
-            if record is not None:
+            if (record := self.__from_row_to_suspension_record(row)) is not None:
                 records.append(record)
 
         return tuple(records)
