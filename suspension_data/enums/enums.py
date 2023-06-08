@@ -1,22 +1,24 @@
-from enum import Enum, unique
+from enum import unique
+
+from utils import AutoCheckRecognizableStrEnum
 
 
 @unique
-class Gender(Enum):
+class Gender(AutoCheckRecognizableStrEnum):
     BOY = '男'
     GIRL = '女'
     OTHER = '其他'
 
 
 @unique
-class SchoolType(Enum):
+class SchoolType(AutoCheckRecognizableStrEnum):
     PUBLIC = '公立'
     PRIVATE = '私立'
     OTHER = '其他'
 
 
 @unique
-class EducationProgram(Enum):
+class EducationProgram(AutoCheckRecognizableStrEnum):
     ASSOCIATE_DEGREE = "專科"
     BACHELORS = "學士班"
     DAYTIME_DOCTORAL = "博士日間"
@@ -35,10 +37,11 @@ class EducationProgram(Enum):
     TWO_YEAR_COLLEGE_EXTENSION = "大學二年制進修"
     TWO_YEAR_DAYTIME_ASSOCIATE_DEGREE = "二專日間"
     TWO_YEAR_DAYTIME_COLLEGE = "大學二年制日間"
+    OTHER = "其他"
 
 
 @unique
-class SuspensionReason(Enum):
+class SuspensionReason(AutoCheckRecognizableStrEnum):
     WORK_REQUIREMENTS = "因工作需求"
     TRAVEL_ABROAD = "因出國"
     EXAM_TRAINING = "因考試訓練"
