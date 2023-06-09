@@ -26,6 +26,4 @@ def start():
 
 
 if __name__ == '__main__':
-    # This is needed to run the script from the root directory
-    os.chdir('..')
     start()
