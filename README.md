@@ -57,12 +57,6 @@ poetry install
 poetry shell
 ```
 
-- Since we are using a virtual environment, set the `PYTHONPATH` at the **project root folder** to run successfullly:
-
-```bash
-export PYTHONPATH="${PYTHONPATH}:`pwd`"
-```
-
 - Execute the main script:
 
 ```bash
