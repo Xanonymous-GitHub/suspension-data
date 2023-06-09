@@ -8,6 +8,7 @@ authors = ["Xanonymous <trusaidlin@gmail.com>"]
 python = ">=3.10 <3.11"
 openai = "^0.27.7"
 pandas = "^2.0.2"
+matplotlib = "^3.7.1"
 
 [tool.poetry.dev-dependencies]
 pytype = "^2023.6.2"
