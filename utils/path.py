@@ -2,7 +2,7 @@ import __main__
 import os
 from typing import Final
 
-__all__ = ['runtime_path_resolver', 'RPATH']
+__all__ = ['runtime_path_resolver']
 
 
 class __Path:
@@ -31,6 +31,4 @@ class __Path:
         self.RUNTIME_DIR = os.getcwd()
 
 
-RPATH = type(__Path)
-
-runtime_path_resolver: Final[RPATH] = __Path()
+runtime_path_resolver: Final[__Path] = __Path()
