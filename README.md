@@ -15,45 +15,64 @@ Usage
 -----
 
 Please make sure you have these tools installed:
+
 - `poetry`
 - `pyenv`
 
 To get the Suspension Project, follow this steps:
 
-- Clone the repository: 
+- Clone the repository:
+
 ```bash
 git clone git@github.com:Xanonymous-GitHub/suspension-data.git
 ```
 
-- Install specific python environment: 
+- Install specific python environment:
+
 ```bash
 pyenv install 3.10
 ```
 
-- Change to that version of python locally: 
+- Change to that version of python locally:
+
 ```bash
 pyenv local 3.10
 ```
 
-- Switch to the python environment: 
+- Switch to the python environment:
+
 ```bash
 poetry env use "$(pyenv which python3)"
 ```
 
-- Install dependencies: 
+- Install dependencies:
+
 ```bash
 poetry install
 ```
 
-- Start the development shell: 
+- Start the development shell:
+
 ```bash
 poetry shell
 ```
 
+- Since we are using a virtual environment, set the `PYTHONPATH` at the **project root folder** to run successfullly:
+
+```bash
+export PYTHONPATH="${PYTHONPATH}:`pwd`"
+```
+
+- Execute the main script:
+
+```bash
+python3 main.py
+```
+
 Check Typing
 -----
-- `pytype $(git ls-files '*.py')`
 
+- `pytype $(git ls-files '*.py')`
 
 License
 -------
