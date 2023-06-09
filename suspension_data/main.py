@@ -20,7 +20,7 @@ def read_csv_content() -> tuple[SuspensionRecord]:
 
 
 def start():
-    records = read_csv_content()
+    records: Final[tuple[SuspensionRecord]] = read_csv_content()
     year_list, count_list = sum_records(records)
     plot_data(year_list, count_list)
 

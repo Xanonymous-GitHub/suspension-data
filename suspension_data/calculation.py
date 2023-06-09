@@ -1,7 +1,9 @@
+from typing import Iterable
+
 from suspension_data.models.models import SuspensionRecord
 
 
-def sum_records(records: tuple[SuspensionRecord]) -> tuple(list[int]):
+def sum_records(records: Iterable[SuspensionRecord]) -> tuple[list[int], list[int]]:
     year_list: list[int] = []
     count_list: list[int] = []
 
