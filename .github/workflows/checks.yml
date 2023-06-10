@@ -1,4 +1,4 @@
-name: Pytype
+name: Checks
 
 on: [push]
 
@@ -19,10 +19,22 @@ jobs:
 
     - name: Setup Poetry
       uses: Gr1N/setup-poetry@v8
-      
+
     - name: Install dependencies
       run: |
         poetry install --no-root
+
+    - name: Analysing the code with pylint
+      run: |
+        poetry run pylint $(git ls-files '*.py')
+
+    - name: Analysing the code with black
+      uses: psf/black@stable
+      with:
+        options: "--check --verbose"
+
+    - name: Analysing the code with python-isort
+      uses: isort/isort-action@v1
 
     - name: Analysing the code with pytype
       run: |
