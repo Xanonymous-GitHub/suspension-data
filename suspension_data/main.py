@@ -15,6 +15,20 @@ def read_csv_content() -> tuple[SuspensionRecord]:
     return dto.to_suspension_records()
 
 
+def generate_train_data(genders: list[Gender], school_types: list[SchoolType],
+                        education_programs: list[EducationProgram],
+                        suspension_reasons: list[SuspensionReason], years: list[int]):
+    train_data: list[list] = []
+    for gender in genders:
+        for school_type in school_types:
+            for program in education_programs:
+                for reason in suspension_reasons:
+                    for year in years:
+                        data = [gender, school_type, program, reason, year]
+                        train_data.append(data)
+    return train_data
+
+
 def start():
     records: Final[tuple[SuspensionRecord]] = read_csv_content()
 
