@@ -12,14 +12,3 @@ class SuspensionRecord(ValidatableDataClass, JsonSerializable):
     suspension_reason: SuspensionReason
     year: int
     count: int
-
-
-def convert_record_to_list(record: SuspensionRecord) -> list:
-    return [
-        record.gender.value,
-        record.school_type.value,
-        record.program.value,
-        record.suspension_reason.value,
-        record.year,
-        record.count
-    ]
