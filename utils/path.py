@@ -1,6 +1,7 @@
-import __main__
 import os
 from typing import Final
+
+import __main__
 
 __all__ = ["runtime_path_resolver"]
 

@@ -1,6 +1,6 @@
 from abc import ABCMeta
-from dataclasses import dataclass, asdict
-from json import dumps, JSONEncoder
+from dataclasses import asdict, dataclass
+from json import JSONEncoder, dumps
 
 __all__ = ["JsonSerializable"]
 

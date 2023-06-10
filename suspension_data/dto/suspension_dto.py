@@ -1,8 +1,8 @@
-from typing import Optional, Final
+from typing import Final, Optional
 
-from pandas import read_csv, DataFrame
+from pandas import DataFrame, read_csv
 
-from suspension_data.enums import Gender, EducationProgram, SchoolType, SuspensionReason
+from suspension_data.enums import EducationProgram, Gender, SchoolType, SuspensionReason
 from suspension_data.models import SuspensionRecord
 
 CSV = DataFrame
