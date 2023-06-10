@@ -1,6 +1,8 @@
+import sys
+sys.path.append("../")
 from enum import unique
-
 from utils import AutoCheckRecognizableStrEnum
+
 
 
 @unique

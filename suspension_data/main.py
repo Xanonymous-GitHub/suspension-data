@@ -3,6 +3,7 @@ from typing import Final
 
 from sklearn.model_selection import train_test_split
 
+from suspension_data.calculation import sum_records, sum_records_divide_gender
 from suspension_data.constants import DATA_SOURCE_LOCATION
 from suspension_data.dto import SuspensionCsvDto
 from suspension_data.enums import EducationProgram, Gender, SchoolType, SuspensionReason
@@ -12,6 +13,7 @@ from suspension_data.models.predict import (
     split_data,
     train_model_and_evaluate,
 )
+from suspension_data.visualize import plot_data, plot_gender_data
 
 
 def read_csv_content() -> tuple[SuspensionRecord]:
@@ -22,11 +24,11 @@ def read_csv_content() -> tuple[SuspensionRecord]:
 
 
 def generate_train_data(
-    genders: list[Gender],
-    school_types: list[SchoolType],
-    education_programs: list[EducationProgram],
-    suspension_reasons: list[SuspensionReason],
-    years: list[int],
+        genders: list[Gender],
+        school_types: list[SchoolType],
+        education_programs: list[EducationProgram],
+        suspension_reasons: list[SuspensionReason],
+        years: list[int],
 ) -> tuple:
     return tuple(
         product(genders, school_types, education_programs, suspension_reasons, years)
@@ -58,6 +60,12 @@ def start():
 
     prediction_result = predict_from_model(model, prediction_data)
     print(prediction_result)
+
+    year_list, count_list = sum_records(records)
+    plot_data(year_list, count_list)
+
+    year_list, male_list, female_count_list = sum_records_divide_gender(records)
+    plot_gender_data(year_list, male_list, female_count_list)
 
 
 if __name__ == "__main__":
