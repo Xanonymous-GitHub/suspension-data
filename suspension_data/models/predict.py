@@ -6,9 +6,6 @@ from keras.models import Sequential
 
 from suspension_data.models.models import SuspensionRecord
 
-num_classes = 1
-input_dim = 5
-train_epochs = 50
 
 
 def split_data(records: Iterable[SuspensionRecord]) -> tuple[list[list], list[int]]:
