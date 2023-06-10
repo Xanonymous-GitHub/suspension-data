@@ -4,9 +4,13 @@ from sklearn.model_selection import train_test_split
 
 from suspension_data.constants import DATA_SOURCE_LOCATION
 from suspension_data.dto import SuspensionCsvDto
-from suspension_data.enums import Gender, SchoolType, EducationProgram, SuspensionReason
+from suspension_data.enums import EducationProgram, Gender, SchoolType, SuspensionReason
 from suspension_data.models import SuspensionRecord
-from suspension_data.models.predict import split_data, train_model_and_evaluate, predict_from_model
+from suspension_data.models.predict import (
+    predict_from_model,
+    split_data,
+    train_model_and_evaluate,
+)
 
 
 def read_csv_content() -> tuple[SuspensionRecord]:
@@ -16,9 +20,13 @@ def read_csv_content() -> tuple[SuspensionRecord]:
     return dto.to_suspension_records()
 
 
-def generate_train_data(genders: list[Gender], school_types: list[SchoolType],
-                        education_programs: list[EducationProgram],
-                        suspension_reasons: list[SuspensionReason], years: list[int]):
+def generate_train_data(
+    genders: list[Gender],
+    school_types: list[SchoolType],
+    education_programs: list[EducationProgram],
+    suspension_reasons: list[SuspensionReason],
+    years: list[int],
+):
     train_data: list[list] = []
     for gender in genders:
         for school_type in school_types:
@@ -42,9 +50,13 @@ def start():
     model, result = train_model_and_evaluate(*model_data_sources)
     print(model, result)
 
-    prediction_data = generate_train_data([Gender.BOY.index], [SchoolType.PUBLIC.index],
-                                          EducationProgram.to_index_list(),
-                                          SuspensionReason.to_index_list(), [111])
+    prediction_data = generate_train_data(
+        [Gender.BOY.index],
+        [SchoolType.PUBLIC.index],
+        EducationProgram.to_index_list(),
+        SuspensionReason.to_index_list(),
+        [111],
+    )
     for data in prediction_data:
         print(data)
     print(len(prediction_data))

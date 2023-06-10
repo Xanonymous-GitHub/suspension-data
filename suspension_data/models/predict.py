@@ -11,7 +11,7 @@ from suspension_data.models.models import SuspensionRecord
 
 
 def split_data(
-        records: Iterable[SuspensionRecord],
+    records: Iterable[SuspensionRecord],
 ) -> tuple[list[tuple[int, ...]], list[int]]:
     train: Final[list[tuple[int, ...]]] = []
     test: Final[list[int]] = []
@@ -35,7 +35,7 @@ def split_data(
 
 
 def train_model_and_evaluate(
-        feature_train, feature_test, target_train, target_test
+    feature_train, feature_test, target_train, target_test
 ) -> tuple[Sequential, float]:
     model = Sequential(
         [
