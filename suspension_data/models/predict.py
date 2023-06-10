@@ -1,4 +1,5 @@
-from typing import Final, Iterable
+from collections.abc import Iterable
+from typing import Final
 
 from keras.layers import Dense
 from keras.models import Sequential
@@ -12,8 +13,8 @@ from suspension_data.models.models import SuspensionRecord
 def split_data(
     records: Iterable[SuspensionRecord],
 ) -> tuple[list[tuple[int, ...]], list[int]]:
-    train: Final[list[tuple[int, ...]]] = list()
-    test: Final[list[int]] = list()
+    train: Final[list[tuple[int, ...]]] = []
+    test: Final[list[int]] = []
 
     for record in records:
         train.append(

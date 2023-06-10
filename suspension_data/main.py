@@ -24,7 +24,7 @@ def start():
         features, targets, test_size=0.1, random_state=42
     )
 
-    model, loss = train_model_and_evaluate(*model_data_sources)
+    loss = train_model_and_evaluate(*model_data_sources)
     print(loss)
 
 
