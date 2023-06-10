@@ -2,7 +2,9 @@ from abc import ABCMeta
 from dataclasses import asdict, dataclass
 from json import JSONEncoder, dumps
 
-__all__ = ["JsonSerializable"]
+from frozendict import frozendict
+
+__all__ = ['JsonSerializable']
 
 
 @dataclass(frozen=True)
@@ -13,12 +15,12 @@ class JsonSerializable(JSONEncoder, metaclass=ABCMeta):
     """
 
     @property
-    def __dict__(self) -> dict:
+    def __dict__(self) -> frozendict:
         """
         Converts the instance's attributes into a dictionary.
         This dictionary can then be used for further operations like JSON serialization.
         """
-        return asdict(self)
+        return frozendict(asdict(self))
 
     @property
     def __json__(self) -> str:
@@ -29,7 +31,7 @@ class JsonSerializable(JSONEncoder, metaclass=ABCMeta):
         return dumps(self.__dict__)
 
     @property
-    def serializable_dict(self) -> dict:
+    def serializable_dict(self) -> frozendict:
         """
         Provides a dictionary representation of the instance's attributes.
         This method can be utilized for making the object serializable to JSON.
@@ -54,5 +56,6 @@ class JsonSerializable(JSONEncoder, metaclass=ABCMeta):
     """
     This attribute is an optimization that provides space for instance attributes 
     in a space-efficient way without the overhead of a dictionary.
-    In this case, it's set to an empty tuple since there are no additional attributes beyond those provided by dataclass.
+    In this case, it's set to an empty tuple since there are no additional attributes 
+    beyond those provided by dataclass.
     """
