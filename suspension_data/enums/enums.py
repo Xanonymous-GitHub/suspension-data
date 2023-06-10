@@ -5,16 +5,16 @@ from utils import AutoCheckRecognizableStrEnum
 
 @unique
 class Gender(AutoCheckRecognizableStrEnum):
-    BOY = '男'
-    GIRL = '女'
-    OTHER = '其他'
+    BOY = "男"
+    GIRL = "女"
+    OTHER = "其他"
 
 
 @unique
 class SchoolType(AutoCheckRecognizableStrEnum):
-    PUBLIC = '公立'
-    PRIVATE = '私立'
-    OTHER = '其他'
+    PUBLIC = "公立"
+    PRIVATE = "私立"
+    OTHER = "其他"
 
 
 @unique

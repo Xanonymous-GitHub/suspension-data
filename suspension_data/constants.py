@@ -4,4 +4,4 @@ from utils import runtime_path_resolver
 
 RUNTIME_DIR = runtime_path_resolver.RUNTIME_DIR
 
-DATA_SOURCE_LOCATION: Final[str] = f'{RUNTIME_DIR}/data_source'
+DATA_SOURCE_LOCATION: Final[str] = f"{RUNTIME_DIR}/data_source"

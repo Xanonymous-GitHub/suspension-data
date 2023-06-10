@@ -9,7 +9,9 @@ from suspension_data.visualize import plot_data
 
 
 def read_csv_content() -> tuple[SuspensionRecord]:
-    dto: Final[SuspensionCsvDto] = SuspensionCsvDto(f'{DATA_SOURCE_LOCATION}/university_suspension_data.csv')
+    dto: Final[SuspensionCsvDto] = SuspensionCsvDto(
+        f"{DATA_SOURCE_LOCATION}/university_suspension_data.csv"
+    )
     records: Final[tuple[SuspensionRecord]] = dto.to_suspension_records()
 
     # pretty print the records
@@ -25,5 +27,5 @@ def start():
     plot_data(year_list, count_list)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     start()

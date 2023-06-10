@@ -13,7 +13,7 @@ class SuspensionCsvDto:
 
     # These are the columns that we expect to drop.
     # The "Category5Title" column is dropped because it is empty.
-    __expect_drop_columns: Final[tuple[str]] = 'Unknown'
+    __expect_drop_columns: Final[tuple[str]] = "Unknown"
 
     # These are the positions of the columns that we expect to have.
     # Note that the positions are 0-based, and the drop columns are not included.
@@ -28,7 +28,7 @@ class SuspensionCsvDto:
         self.__csv_file_path = csv_file_path
 
     def __read_csv_content(self) -> CSV:
-        return read_csv(self.__csv_file_path, encoding='utf-8')
+        return read_csv(self.__csv_file_path, encoding="utf-8")
 
     def __remove_unnecessary_columns(self, csv: CSV) -> CSV:
         return csv.drop(columns=self.__expect_drop_columns)
@@ -72,7 +72,8 @@ class SuspensionCsvDto:
             program=program,
             school_type=school_type,
             suspension_reason=reason,
-            year=year, count=count
+            year=year,
+            count=count,
         )
 
     def to_suspension_records(self) -> tuple[SuspensionRecord]:

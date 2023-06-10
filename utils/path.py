@@ -2,7 +2,7 @@ import __main__
 import os
 from typing import Final
 
-__all__ = ['runtime_path_resolver']
+__all__ = ["runtime_path_resolver"]
 
 
 class __Path:
@@ -25,7 +25,7 @@ class __Path:
         current_dir: Final[str] = os.path.dirname(os.path.abspath(__main__.__file__))
 
         # This is needed to run the script from the root directory
-        os.chdir(f'{current_dir}/..')
+        os.chdir(f"{current_dir}/..")
 
         # Get the runtime directory path
         self.RUNTIME_DIR = os.getcwd()

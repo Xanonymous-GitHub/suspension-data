@@ -1,6 +1,6 @@
 from enum import Enum
 
-__all__ = ['AutoCheckRecognizableStrEnum']
+__all__ = ["AutoCheckRecognizableStrEnum"]
 
 
 class AutoCheckRecognizableStrEnum(Enum):
@@ -10,7 +10,9 @@ class AutoCheckRecognizableStrEnum(Enum):
         This method is invoked when an invalid enum value is passed.
         It raises a ValueError with a message that lists all the valid enum values.
         """
-        raise ValueError(f'Invalid {cls.__name__} value: {key}. Valid values are: {[e.value for e in cls]}')
+        raise ValueError(
+            f"Invalid {cls.__name__} value: {key}. Valid values are: {[e.value for e in cls]}"
+        )
 
     @classmethod
     def is_valid(cls, value):

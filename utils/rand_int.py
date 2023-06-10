@@ -1,7 +1,7 @@
 import secrets
 import sys
 
-__all__ = ['randint_safe']
+__all__ = ["randint_safe"]
 
 
 def randint_safe(a: int, b: int) -> int:
