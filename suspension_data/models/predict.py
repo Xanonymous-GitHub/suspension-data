@@ -1,5 +1,5 @@
 from collections.abc import Iterable
-from typing import Final
+from typing import Any, Final
 
 from keras.layers import Dense
 from keras.models import Sequential
@@ -63,5 +63,7 @@ def train_model_and_evaluate(
     return model, model.evaluate(feature_test, target_test, verbose=0)
 
 
-def predict_from_model(model: Sequential, prediction_data: list[list]) -> list[float]:
+def predict_from_model(
+    model: Sequential, prediction_data: Iterable[Any, ...]
+) -> list[float]:
     return model.predict(prediction_data)

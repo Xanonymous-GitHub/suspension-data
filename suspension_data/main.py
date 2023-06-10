@@ -1,3 +1,4 @@
+from itertools import product
 from typing import Final
 
 from sklearn.model_selection import train_test_split
@@ -26,16 +27,10 @@ def generate_train_data(
     education_programs: list[EducationProgram],
     suspension_reasons: list[SuspensionReason],
     years: list[int],
-):
-    train_data: list[list] = []
-    for gender in genders:
-        for school_type in school_types:
-            for program in education_programs:
-                for reason in suspension_reasons:
-                    for year in years:
-                        data = [gender, school_type, program, reason, year]
-                        train_data.append(data)
-    return train_data
+) -> tuple[int, ...]:
+    return tuple(
+        product(genders, school_types, education_programs, suspension_reasons, years)
+    )
 
 
 def start():
