@@ -21,6 +21,20 @@ class AutoCheckRecognizableStrEnum(Enum):
         """
         return value in cls._value2member_map_
 
+    @classmethod
+    def to_list(cls) -> list[str]:
+        """
+        This method returns a list of all the enum values.
+        """
+        return [e.value for e in cls]
+
+    @classmethod
+    def to_index_list(cls) -> list[int]:
+        """
+        This method returns a list of all the enum values' index.
+        """
+        return [e.index for e in cls]
+
     @property
     def index(self) -> int:
         """
