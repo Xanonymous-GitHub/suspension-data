@@ -1,4 +1,4 @@
-from typing import Final, Optional
+from typing import Final
 
 from pandas import DataFrame, read_csv
 
@@ -33,7 +33,7 @@ class SuspensionCsvDto:
     def __remove_unnecessary_columns(self, csv: CSV) -> CSV:
         return csv.drop(columns=self.__expect_drop_columns)
 
-    def __from_row_to_suspension_record(self, row: tuple) -> Optional[SuspensionRecord]:
+    def __from_row_to_suspension_record(self, row: tuple) -> SuspensionRecord | None:
         if Gender.is_valid(raw_gender := row[self.GENDER_POS]):
             gender: Final[Gender] = Gender(raw_gender)
         else:
@@ -80,7 +80,7 @@ class SuspensionCsvDto:
         raw_csv: Final[CSV] = self.__read_csv_content()
         cleared_csv: Final[CSV] = self.__remove_unnecessary_columns(raw_csv)
 
-        records: Final[list[SuspensionRecord]] = list()
+        records: Final[list[SuspensionRecord]] = []
         for row in cleared_csv.itertuples(index=False):
             if (record := self.__from_row_to_suspension_record(row)) is not None:
                 records.append(record)

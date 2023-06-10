@@ -5,13 +5,13 @@ __all__ = ["AutoCheckRecognizableStrEnum"]
 
 class AutoCheckRecognizableStrEnum(Enum):
     @classmethod
-    def _missing_(cls, key):
+    def _missing_(cls, value):
         """
         This method is invoked when an invalid enum value is passed.
         It raises a ValueError with a message that lists all the valid enum values.
         """
         raise ValueError(
-            f"Invalid {cls.__name__} value: {key}. Valid values are: {[e.value for e in cls]}"
+            f"Invalid {cls.__name__} value: {value}. Valid values are: {[e.value for e in cls]}"
         )
 
     @classmethod

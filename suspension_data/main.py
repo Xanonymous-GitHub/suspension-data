@@ -1,4 +1,3 @@
-import os
 from typing import Final
 
 from suspension_data.calculation import sum_records

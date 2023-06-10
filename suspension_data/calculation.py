@@ -1,4 +1,4 @@
-from typing import Iterable
+from collections.abc import Iterable
 
 from suspension_data.models.models import SuspensionRecord
 
