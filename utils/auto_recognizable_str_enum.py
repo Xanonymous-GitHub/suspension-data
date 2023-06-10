@@ -21,6 +21,12 @@ class AutoCheckRecognizableStrEnum(Enum):
         """
         return value in cls._value2member_map_
 
+    def index(self):
+        """
+        This method returns the index of the enum value.
+        """
+        return tuple(self.__class__).index(self)
+
     def __str__(self):
         return self.value
 
