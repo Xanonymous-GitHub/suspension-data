@@ -22,7 +22,7 @@ def split_data(records: Iterable[SuspensionRecord]) -> tuple[list[list], list[in
     return train, test
 
 
-def train_model_and_predict(x_train, x_test, y_train):
+def train_model_and_predict(x_train, y_train, x_test):
     model = Sequential()
     model.add(Dense(units=256, input_dim=input_dim, kernel_initializer='normal', activation='relu'))
     model.add(Dense(units=256, kernel_initializer='normal', activation='relu'))

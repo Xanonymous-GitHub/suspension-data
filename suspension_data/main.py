@@ -8,35 +8,26 @@ from suspension_data.models.predict import split_data, train_model_and_predict
 
 
 def read_csv_content() -> tuple[SuspensionRecord]:
-    dto: Final[SuspensionCsvDto] = SuspensionCsvDto(
-        f"{DATA_SOURCE_LOCATION}/university_suspension_data.csv"
-    )
-    records: Final[tuple[SuspensionRecord]] = dto.to_suspension_records()
-
-    # pretty print the records
-    # for record in records:
-    # print(record.serializable_dict)
-
-    return records
+    dto: Final[SuspensionCsvDto] = SuspensionCsvDto(f'{DATA_SOURCE_LOCATION}/university_suspension_data.csv')
+    return dto.to_suspension_records()
 
 
 def start():
     records: Final[tuple[SuspensionRecord]] = read_csv_content()
-    # year_list, count_list = sum_records(records)
-    # plot_data(year_list, count_list)
 
     x_train, y_train = split_data(records)
-    x_test: list[list] = []
+    x_test: Final[list[list]] = []
+
     for year in range(111, 115):
-        test_data = [
+        x_test.append([
             Gender.BOY.index,
             SchoolType.PUBLIC.index,
             EducationProgram.BACHELORS.index,
             SuspensionReason.WORK_REQUIREMENTS.index,
             year
-        ]
-        x_test.append(test_data)
-    y_test: list = train_model_and_predict(x_train, x_test, y_train)
+        ])
+
+    y_test: Final[list] = train_model_and_predict(x_train, y_train, x_test)
 
     # TODO: check the output data is as expected
     result: list = []
