@@ -64,6 +64,6 @@ def train_model_and_evaluate(
 
 
 def predict_from_model(
-    model: Sequential, prediction_data: Iterable[Any, ...]
+    model: Sequential, prediction_data: Iterable[Any]
 ) -> list[float]:
     return model.predict(prediction_data)

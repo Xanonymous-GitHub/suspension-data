@@ -27,7 +27,7 @@ def generate_train_data(
     education_programs: list[EducationProgram],
     suspension_reasons: list[SuspensionReason],
     years: list[int],
-) -> tuple[int, ...]:
+) -> tuple:
     return tuple(
         product(genders, school_types, education_programs, suspension_reasons, years)
     )
