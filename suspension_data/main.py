@@ -3,7 +3,7 @@ from typing import Final
 
 from sklearn.model_selection import train_test_split
 
-from suspension_data.calculation import sum_records, sum_records_divide_gender
+from calculation import sum_records, sum_records_divide_program
 from suspension_data.constants import DATA_SOURCE_LOCATION
 from suspension_data.dto import SuspensionCsvDto
 from suspension_data.enums import EducationProgram, Gender, SchoolType, SuspensionReason
@@ -13,7 +13,7 @@ from suspension_data.models.predict import (
     split_data,
     train_model_and_evaluate,
 )
-from suspension_data.visualize import plot_data, plot_gender_data
+from suspension_data.visualize import plot_data
 
 
 def read_csv_content() -> tuple[SuspensionRecord]:
@@ -63,9 +63,19 @@ def start():
 
     year_list, count_list = sum_records(records)
     plot_data(year_list, count_list)
+    # year_list, count_list = sum_records(records)
+    # plot_data(year_list, count_list)
 
-    year_list, male_list, female_count_list = sum_records_divide_gender(records)
-    plot_gender_data(year_list, male_list, female_count_list)
+    # year_list, male_list, female_count_list = sum_records_divide_gender(records)
+    # plot_gender_data(year_list, male_list, female_count_list)
+
+    # year_list, public_list, private_list = sum_records_divide_school_type(records)
+    # plot_school_type_data(year_list, public_list, private_list)
+
+    year_list, total_divide_list, program_type_list = sum_records_divide_program(records)
+    print(total_divide_list[4])
+    print(total_divide_list[5])
+    # plot_program_data(year_list, total_divide_list, program_type_list)
 
 
 if __name__ == "__main__":

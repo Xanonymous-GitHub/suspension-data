@@ -19,9 +19,8 @@ def sum_records(records: Iterable[SuspensionRecord]) -> tuple[list[int], list[in
 def sum_records_divide_gender(records: Iterable[SuspensionRecord]) -> tuple[list[int], list[int]]:
     year_list: list[int] = []
     male_list: list[int] = []
-    
     for record in records:
-        if record.gender.value == "男":
+        if record.gender.value == Gender.BOY.value:
             if record.year not in year_list:
                 year_list.append(record.year)
                 male_list.append(record.count)
@@ -31,7 +30,7 @@ def sum_records_divide_gender(records: Iterable[SuspensionRecord]) -> tuple[list
     year_list: list[int] = []
     female_list: list[int] = []
     for record in records:
-        if record.gender.value == "女":
+        if record.gender.value == Gender.GIRL.value:
             if record.year not in year_list:
                 year_list.append(record.year)
                 female_list.append(record.count)
@@ -40,55 +39,46 @@ def sum_records_divide_gender(records: Iterable[SuspensionRecord]) -> tuple[list
 
     return year_list, male_list, female_list
 
-# def sum_records_of_gender(records: Iterable[SuspensionRecord]) -> tuple[list[Gender], list[int]]:
-#     gender_list: list[Gender] = []
-#     count_list: list[int] = []
+def sum_records_divide_school_type(records: Iterable[SuspensionRecord]) -> tuple[list[int], list[int]]:
+    year_list: list[int] = []
+    public_list: list[int] = []
+    
+    for record in records:
+        if record.school_type.value == SchoolType.PUBLIC.value:
+            if record.year not in year_list:
+                year_list.append(record.year)
+                public_list.append(record.count)
+            else:
+                public_list[year_list.index(record.year)] += record.count
 
-#     for record in records:
-#         if record.gender not in gender_list:
-#             gender_list.append(record.gender)
-#             count_list.append(record.count)
-#         else:
-#             count_list[gender_list.index(record.gender)] += record.count
+    year_list: list[int] = []
+    private_list: list[int] = []
+    for record in records:
+        if record.school_type.value == SchoolType.PRIVATE.value:
+            if record.year not in year_list:
+                year_list.append(record.year)
+                private_list.append(record.count)
+            else:
+                private_list[year_list.index(record.year)] += record.count
+    return year_list, public_list, private_list
 
-#     return gender_list, count_list
-
-# def sum_records_of_schoolType(records: Iterable[SuspensionRecord]) -> tuple[list[SchoolType], list[int]]:
-#     schoolType_list: list[SchoolType] = []
-#     count_list: list[int] = []
-
-#     for record in records:
-#         if record.school_type not in schoolType_list:
-#             schoolType_list.append(record.school_type)
-#             count_list.append(record.count)
-#         else:
-#             count_list[schoolType_list.index(record.school_type)] += record.count
-
-#     return schoolType_list, count_list
-
-# def sum_records_of_educationProgram(records: Iterable[SuspensionRecord]) -> tuple[list[EducationProgram], list[int]]:
-#     educationProgram_list: list[EducationProgram] = []
-#     count_list: list[int] = []
-
-#     for record in records:
-#         if record.program not in educationProgram_list:
-#             educationProgram_list.append(record.program)
-#             count_list.append(record.count)
-#         else:
-#             count_list[educationProgram_list.index(record.program)] += record.count
-
-#     return educationProgram_list, count_list
-
-
-# def sum_records_of_reason(records: Iterable[SuspensionRecord]) -> tuple[list[SuspensionReason], list[int]]:
-#     reason_list: list[SuspensionReason] = []
-#     count_list: list[int] = []
-
-#     for record in records:
-#         if record.suspension_reason not in reason_list:
-#             reason_list.append(record.suspension_reason)
-#             count_list.append(record.count)
-#         else:
-#             count_list[reason_list.index(record.suspension_reason)] += record.count
-
-#     return reason_list, count_list
+def sum_records_divide_program(records: Iterable[SuspensionRecord]) -> tuple[list[int], list[int], list[int]]:
+    total_divide_list = []
+    years_list = []
+    counting = 0
+    for program in EducationProgram:
+        year_list: list[int] = []
+        temp_list: list[int] = []
+        
+        for record in records:
+            if record.program.value == program.value:
+                if record.year not in year_list:
+                    years_list.append(record.year)
+                    year_list.append(record.year)
+                    temp_list.append(record.count)
+                else:
+                    temp_list[year_list.index(record.year)] += record.count
+        total_divide_list.append(temp_list)
+    years_list = list(dict.fromkeys(years_list)) 
+    program_type_list = [program.value for program in EducationProgram]
+    return years_list, total_divide_list[:-1], program_type_list[:-1]
