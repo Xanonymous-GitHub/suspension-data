@@ -1,29 +1,31 @@
 from typing import Final
 
-from suspension_data.calculation import sum_records
+from sklearn.model_selection import train_test_split
+
 from suspension_data.constants import DATA_SOURCE_LOCATION
 from suspension_data.dto import SuspensionCsvDto
 from suspension_data.models import SuspensionRecord
-from suspension_data.visualize import plot_data
+from suspension_data.models.predict import split_data, train_model_and_evaluate
 
 
 def read_csv_content() -> tuple[SuspensionRecord]:
     dto: Final[SuspensionCsvDto] = SuspensionCsvDto(
         f"{DATA_SOURCE_LOCATION}/university_suspension_data.csv"
     )
-    records: Final[tuple[SuspensionRecord]] = dto.to_suspension_records()
-
-    # pretty print the records
-    for record in records:
-        print(record.serializable_dict)
-
-    return records
+    return dto.to_suspension_records()
 
 
 def start():
     records: Final[tuple[SuspensionRecord]] = read_csv_content()
-    year_list, count_list = sum_records(records)
-    plot_data(year_list, count_list)
+
+    features, targets = split_data(records)
+
+    model_data_sources = train_test_split(
+        features, targets, test_size=0.1, random_state=42
+    )
+
+    loss = train_model_and_evaluate(*model_data_sources)
+    print(loss)
 
 
 if __name__ == "__main__":
