@@ -6,7 +6,7 @@ from keras.models import Sequential
 
 from suspension_data.models.models import SuspensionRecord
 
-num_classes = 5
+num_classes = 1
 input_dim = 5
 train_epochs = 50
 
@@ -16,9 +16,8 @@ def split_data(records: Iterable[SuspensionRecord]) -> tuple[list[list], list[in
     test: list[int] = []
 
     for record in records:
-        record_data = list(record.serializable_dict.values())
-        test.append(record_data.pop())
-        train.append(record_data)
+        train.append([record.gender.index, record.school_type.index, record.program.index, record.suspension_reason.index, record.year])
+        test.append(record.count)
 
     return train, test
 

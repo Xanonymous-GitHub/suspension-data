@@ -29,15 +29,16 @@ def start():
     x_test: list[list] = []
     for year in range(111, 115):
         test_data = [
-            Gender.BOY.value,
-            SchoolType.PUBLIC.value,
-            EducationProgram.BACHELORS.value,
-            SuspensionReason.WORK_REQUIREMENTS.value,
+            Gender.BOY.index,
+            SchoolType.PUBLIC.index,
+            EducationProgram.BACHELORS.index,
+            SuspensionReason.WORK_REQUIREMENTS.index,
             year
         ]
         x_test.append(test_data)
     y_test: list = train_model_and_predict(x_train, x_test, y_train)
 
+    # TODO: check the output data is as expected
     result: list = []
     for x_data, y_data in zip(x_test, y_test):
         result = x_data + [y_data]
