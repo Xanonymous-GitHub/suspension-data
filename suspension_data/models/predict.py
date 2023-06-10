@@ -1,35 +1,43 @@
-from typing import Iterable
+from typing import Iterable, Final
 
-import numpy as np
 from keras.layers import Dense
 from keras.models import Sequential
+from keras.optimizers import Adam
+from sklearn.preprocessing import StandardScaler
 
+from suspension_data.constants import INPUT_DIM, TRAIN_EPOCHS
 from suspension_data.models.models import SuspensionRecord
 
 
-
-def split_data(records: Iterable[SuspensionRecord]) -> tuple[list[list], list[int]]:
-    train: list[list] = []
-    test: list[int] = []
+def split_data(records: Iterable[SuspensionRecord]) -> tuple[list[tuple[int, ...]], list[int]]:
+    train: Final[list[tuple[int, ...]]] = list()
+    test: Final[list[int]] = list()
 
     for record in records:
-        train.append([record.gender.index, record.school_type.index, record.program.index, record.suspension_reason.index, record.year])
+        train.append((
+            record.gender.index,
+            record.school_type.index,
+            record.program.index,
+            record.suspension_reason.index,
+            record.year
+        ))
         test.append(record.count)
+
+    scaler = StandardScaler()
+    scaler.fit_transform(train)
 
     return train, test
 
 
-def train_model_and_predict(x_train, y_train, x_test):
-    model = Sequential()
-    model.add(Dense(units=256, input_dim=input_dim, kernel_initializer='normal', activation='relu'))
-    model.add(Dense(units=256, kernel_initializer='normal', activation='relu'))
-    model.add(Dense(units=256, kernel_initializer='normal', activation='relu'))
-    model.add(Dense(units=num_classes, kernel_initializer='normal', activation='softmax'))
-    model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
-    model.fit(x=x_train, y=y_train, validation_split=0.0, epochs=train_epochs, batch_size=32, verbose=1)
+def train_model_and_evaluate(feature_train, feature_test, target_train, target_test) -> tuple[Sequential, float]:
+    model = Sequential([
+        Dense(units=64, input_dim=INPUT_DIM, kernel_initializer='normal', activation='relu'),
+        Dense(units=64, kernel_initializer='normal', activation='relu'),
+        Dense(units=64, kernel_initializer='normal', activation='relu'),
+        Dense(units=1, kernel_initializer='normal', activation='linear')
+    ])
 
-    y_test = []
-    predict_results = model.predict(x_test)
-    for result in predict_results:
-        y_test.append(np.argmax(result))
-    return y_test
+    model.compile(loss='mean_squared_error', optimizer=Adam(learning_rate=0.001), metrics=['accuracy'])
+    model.fit(x=feature_train, y=target_train, epochs=TRAIN_EPOCHS, batch_size=10, verbose=1)
+
+    return model, model.evaluate(feature_test, target_test, verbose=0)
