@@ -9,7 +9,9 @@ from suspension_data.models.predict import split_data, train_model_and_evaluate
 
 
 def read_csv_content() -> tuple[SuspensionRecord]:
-    dto: Final[SuspensionCsvDto] = SuspensionCsvDto(f'{DATA_SOURCE_LOCATION}/university_suspension_data.csv')
+    dto: Final[SuspensionCsvDto] = SuspensionCsvDto(
+        f"{DATA_SOURCE_LOCATION}/university_suspension_data.csv"
+    )
     return dto.to_suspension_records()
 
 
@@ -19,10 +21,7 @@ def start():
     features, targets = split_data(records)
 
     model_data_sources = train_test_split(
-        features,
-        targets,
-        test_size=0.1,
-        random_state=42
+        features, targets, test_size=0.1, random_state=42
     )
 
     model, loss = train_model_and_evaluate(*model_data_sources)

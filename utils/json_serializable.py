@@ -4,7 +4,7 @@ from json import JSONEncoder, dumps
 
 from frozendict import frozendict
 
-__all__ = ['JsonSerializable']
+__all__ = ["JsonSerializable"]
 
 
 @dataclass(frozen=True)
