@@ -53,9 +53,9 @@ class SuspensionCsvDto:
             return None
 
         if SuspensionReason.is_valid(raw_reason := row[self.REASON_POS]):
-            reason: Final[SuspensionReason] = SuspensionReason(raw_reason)
+            reason: SuspensionReason = SuspensionReason(raw_reason)
         else:
-            return None
+            reason: Final[SuspensionReason] = SuspensionReason.OTHER
 
         # For this column, we should remove the last two characters, which are the "00" part.
         if isinstance(raw_year := row[self.YEAR_POS], str):
