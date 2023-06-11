@@ -1,4 +1,5 @@
 from enum import unique
+
 from utils import AutoCheckRecognizableStrEnum
 
 
