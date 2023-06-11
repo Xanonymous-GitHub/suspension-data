@@ -1,14 +1,14 @@
 from itertools import product
 from typing import Final
 
-from calculation import (
+from sklearn.model_selection import train_test_split
+
+from suspension_data.calculation import (
     sum_records,
     sum_records_divide_gender,
     sum_records_divide_program,
     sum_records_divide_school_type,
 )
-from sklearn.model_selection import train_test_split
-
 from suspension_data.constants import DATA_SOURCE_LOCATION
 from suspension_data.dto import SuspensionCsvDto
 from suspension_data.enums import EducationProgram, Gender, SchoolType, SuspensionReason
