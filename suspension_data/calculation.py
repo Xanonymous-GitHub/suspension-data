@@ -38,7 +38,7 @@ def sum_records_divide_school_type(
     return frozendict(result)
 
 
-def sum_records_divide_program(
+def sum_records_divide_education_program(
     records: Iterable[SuspensionRecord],
 ) -> frozendict[int, frozendict[EducationProgram, int]]:
     result: dict[int, dict[EducationProgram, int]] = defaultdict(

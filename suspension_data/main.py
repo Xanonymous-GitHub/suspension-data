@@ -6,7 +6,7 @@ from sklearn.model_selection import train_test_split
 from suspension_data.calculation import (
     sum_records,
     sum_records_divide_gender,
-    sum_records_divide_program,
+    sum_records_divide_education_program,
     sum_records_divide_school_type,
 )
 from suspension_data.constants import DATA_SOURCE_LOCATION
@@ -21,7 +21,7 @@ from suspension_data.models.predict import (
 from suspension_data.visualize import (
     plot_data,
     plot_gender_data,
-    plot_program_data,
+    plot_education_program_data,
     plot_school_type_data,
 )
 
@@ -80,8 +80,8 @@ def start():
     school_type_separated_record_dict = sum_records_divide_school_type(records)
     plot_school_type_data(school_type_separated_record_dict)
 
-    program_separated_record_dict = sum_records_divide_program(records)
-    plot_program_data(program_separated_record_dict)
+    education_program_separated_record_dict = sum_records_divide_education_program(records)
+    plot_education_program_data(education_program_separated_record_dict)
 
 
 if __name__ == "__main__":

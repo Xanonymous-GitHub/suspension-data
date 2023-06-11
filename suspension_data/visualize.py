@@ -58,7 +58,7 @@ def plot_school_type_data(
     plt.show()
 
 
-def plot_program_data(
+def plot_education_program_data(
     program_separated_record_dict: frozendict[int, frozendict[EducationProgram, int]]
 ) -> None:
     years = [*program_separated_record_dict.keys()]
