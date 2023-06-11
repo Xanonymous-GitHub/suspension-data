@@ -1,41 +1,59 @@
-from matplotlib.font_manager import FontProperties
-from suspension_data.enums.enums import SuspensionReason, Gender, EducationProgram, SchoolType
-from matplotlib.pyplot import gca
 import matplotlib.pyplot as plt
-import numpy as np
+from frozendict import frozendict
+from matplotlib import rcParams
+from matplotlib.font_manager import fontManager
 
-def plot_data(x_list: list[int], y_list: list[int]) -> None:
-    plt.plot(x_list, y_list)
-    plt.xlabel("Year")
-    plt.ylabel("Number of Suspensions")
-    plt.title("Suspensions by Year")
+from suspension_data.constants import ASSETS_LOCATION
+from suspension_data.enums.enums import Gender, EducationProgram, SchoolType
+
+fontManager.addfont(path=f'{ASSETS_LOCATION}/TaipeiSans.ttf')
+rcParams['font.family'] = 'Taipei Sans TC Beta'
+
+
+def plot_data(year_separated_record_dict: frozendict[int, int]) -> None:
+    plt.plot([*year_separated_record_dict.keys()], [*year_separated_record_dict.values()])
+    plt.xlabel('Year')
+    plt.ylabel('Number of Suspensions')
+    plt.title('Suspensions by Year')
     plt.show()
 
-def plot_gender_data(year_list: list[int], male_list: list[int], female_list: list[int]) -> None:
-    plt.plot(year_list, male_list, label="male")
-    plt.plot(year_list, female_list, label="female")
+
+def plot_gender_data(gender_separated_record_dict: frozendict[int, frozendict[Gender, int]]) -> None:
+    years = [*gender_separated_record_dict.keys()]
+
+    males = [gender_separated_record_dict[year][Gender.BOY] for year in years]
+    females = [gender_separated_record_dict[year][Gender.GIRL] for year in years]
+
+    plt.plot(years, males, label="male")
+    plt.plot(years, females, label="female")
     plt.xlabel('Year')
     plt.ylabel('Number of Suspensions')
     plt.title('Suspensions by Year')
     plt.legend()
     plt.show()
 
-def plot_school_type_data(year_list: list[int], public_list: list[int], private_list: list[int]) -> None:
-    plt.plot(year_list, public_list, label="public")
-    plt.plot(year_list, private_list, label="private")
+
+def plot_school_type_data(school_type_separated_record_dict: frozendict[int, frozendict[SchoolType, int]]) -> None:
+    years = [*school_type_separated_record_dict.keys()]
+
+    opens = [school_type_separated_record_dict[year][SchoolType.PUBLIC] for year in years]
+    privates = [school_type_separated_record_dict[year][SchoolType.PRIVATE] for year in years]
+
+    plt.plot(years, opens, label="public")
+    plt.plot(years, privates, label="private")
     plt.xlabel('Year')
     plt.ylabel('Number of Suspensions')
     plt.title('Suspensions by Year')
     plt.legend()
     plt.show()
 
-def plot_program_data(year_list: list[int], programs_list, program_type_list) -> None:
-    plt.plot(year_list, programs_list[0], label="test1")
-    plt.plot(year_list, programs_list[1], label="test2")
-    plt.plot(year_list, programs_list[2], label="test1")
-    plt.plot(year_list, programs_list[3], label="test1")
-    plt.plot(year_list, programs_list[4], label="test1")
-    plt.plot(year_list, programs_list[5], label="test1")
+
+def plot_program_data(program_separated_record_dict: frozendict[int, frozendict[EducationProgram, int]]) -> None:
+    years = [*program_separated_record_dict.keys()]
+
+    for edu_prog in EducationProgram:
+        plt.plot(years, [program_separated_record_dict[year][edu_prog] for year in years], label=edu_prog.value)
+
     plt.xlabel('Year')
     plt.ylabel('Number of Suspensions')
     plt.title('Suspensions by Year')
