@@ -3,7 +3,8 @@ from typing import Final
 
 from sklearn.model_selection import train_test_split
 
-from calculation import sum_records, sum_records_divide_program
+from calculation import sum_records, sum_records_divide_gender, sum_records_divide_school_type, \
+    sum_records_divide_program
 from suspension_data.constants import DATA_SOURCE_LOCATION
 from suspension_data.dto import SuspensionCsvDto
 from suspension_data.enums import EducationProgram, Gender, SchoolType, SuspensionReason
@@ -13,7 +14,7 @@ from suspension_data.models.predict import (
     split_data,
     train_model_and_evaluate,
 )
-from suspension_data.visualize import plot_data
+from suspension_data.visualize import plot_data, plot_gender_data, plot_school_type_data, plot_program_data
 
 
 def read_csv_content() -> tuple[SuspensionRecord]:
@@ -61,21 +62,17 @@ def start():
     prediction_result = predict_from_model(model, prediction_data)
     print(prediction_result)
 
-    year_list, count_list = sum_records(records)
-    plot_data(year_list, count_list)
-    # year_list, count_list = sum_records(records)
-    # plot_data(year_list, count_list)
+    year_separated_record_dict = sum_records(records)
+    plot_data(year_separated_record_dict)
 
-    # year_list, male_list, female_count_list = sum_records_divide_gender(records)
-    # plot_gender_data(year_list, male_list, female_count_list)
+    gender_separated_record_dict = sum_records_divide_gender(records)
+    plot_gender_data(gender_separated_record_dict)
 
-    # year_list, public_list, private_list = sum_records_divide_school_type(records)
-    # plot_school_type_data(year_list, public_list, private_list)
+    school_type_separated_record_dict = sum_records_divide_school_type(records)
+    plot_school_type_data(school_type_separated_record_dict)
 
-    year_list, total_divide_list, program_type_list = sum_records_divide_program(records)
-    print(total_divide_list[4])
-    print(total_divide_list[5])
-    # plot_program_data(year_list, total_divide_list, program_type_list)
+    program_separated_record_dict = sum_records_divide_program(records)
+    plot_program_data(program_separated_record_dict)
 
 
 if __name__ == "__main__":
