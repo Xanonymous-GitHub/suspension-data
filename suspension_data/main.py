@@ -5,8 +5,8 @@ from sklearn.model_selection import train_test_split
 
 from suspension_data.calculation import (
     sum_records,
-    sum_records_divide_gender,
     sum_records_divide_education_program,
+    sum_records_divide_gender,
     sum_records_divide_school_type,
 )
 from suspension_data.constants import DATA_SOURCE_LOCATION
@@ -20,8 +20,8 @@ from suspension_data.predict import (
 )
 from suspension_data.visualize import (
     plot_data,
-    plot_gender_data,
     plot_education_program_data,
+    plot_gender_data,
     plot_school_type_data,
 )
 
@@ -34,11 +34,11 @@ def read_csv_content() -> tuple[SuspensionRecord]:
 
 
 def generate_train_data(
-        genders: list[Gender],
-        school_types: list[SchoolType],
-        education_programs: list[EducationProgram],
-        suspension_reasons: list[SuspensionReason],
-        years: list[int],
+    genders: list[Gender],
+    school_types: list[SchoolType],
+    education_programs: list[EducationProgram],
+    suspension_reasons: list[SuspensionReason],
+    years: list[int],
 ) -> tuple:
     return tuple(
         product(genders, school_types, education_programs, suspension_reasons, years)
@@ -55,7 +55,9 @@ def visualize(records: tuple[SuspensionRecord]):
     school_type_separated_record_dict = sum_records_divide_school_type(records)
     plot_school_type_data(school_type_separated_record_dict)
 
-    education_program_separated_record_dict = sum_records_divide_education_program(records)
+    education_program_separated_record_dict = sum_records_divide_education_program(
+        records
+    )
     plot_education_program_data(education_program_separated_record_dict)
 
 
