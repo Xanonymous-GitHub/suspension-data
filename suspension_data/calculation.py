@@ -1,10 +1,28 @@
 from collections import defaultdict
-from collections.abc import Iterable
+from collections.abc import Callable, Iterable
+from typing import TypeVar
 
 from frozendict import frozendict
 
 from suspension_data.enums import EducationProgram, Gender, SchoolType, SuspensionReason
 from suspension_data.models.models import SuspensionRecord
+
+_T = TypeVar("_T")
+
+
+def _sum_records_divided_by(
+    records: Iterable[SuspensionRecord],
+    key_func: Callable[[SuspensionRecord], SuspensionRecord],
+) -> frozendict[int, frozendict[_T, int]]:
+    result: dict[int, dict[SuspensionRecord, int]] = defaultdict(
+        lambda: defaultdict(int)
+    )
+
+    for record in records:
+        key = key_func(record)
+        result[record.year][key] += record.count
+
+    return frozendict(result)
 
 
 def sum_records(records: Iterable[SuspensionRecord]) -> frozendict[int, int]:
@@ -19,64 +37,22 @@ def sum_records(records: Iterable[SuspensionRecord]) -> frozendict[int, int]:
 def sum_records_divide_gender(
     records: Iterable[SuspensionRecord],
 ) -> frozendict[int, frozendict[Gender, int]]:
-    result: dict[int, dict[Gender, int]] = defaultdict(lambda: defaultdict(int))
-
-    for record in records:
-        result[record.year][record.gender] += record.count
-
-    return frozendict(result)
+    return _sum_records_divided_by(records, lambda record: record.gender)
 
 
 def sum_records_divide_school_type(
     records: Iterable[SuspensionRecord],
 ) -> frozendict[int, frozendict[SchoolType, int]]:
-    result: dict[int, dict[SchoolType, int]] = defaultdict(lambda: defaultdict(int))
-
-    for record in records:
-        result[record.year][record.school_type] += record.count
-
-    return frozendict(result)
+    return _sum_records_divided_by(records, lambda record: record.school_type)
 
 
 def sum_records_divide_education_program(
     records: Iterable[SuspensionRecord],
 ) -> frozendict[int, frozendict[EducationProgram, int]]:
-    result: dict[int, dict[EducationProgram, int]] = defaultdict(
-        lambda: defaultdict(int)
-    )
+    return _sum_records_divided_by(records, lambda record: record.program)
 
-    for record in records:
-        result[record.year][record.program] += record.count
-
-    return frozendict(result)
 
 def sum_records_divide_suspension_reason(
     records: Iterable[SuspensionRecord],
 ) -> frozendict[int, frozendict[SuspensionReason, int]]:
-    result: dict[int, dict[SuspensionReason, int]] = defaultdict(
-        lambda: defaultdict(int)
-    )
-
-    for record in records:
-        result[record.year][record.suspension_reason] += record.count
-
-    return frozendict(result)
-
-def sum_records_divide_suspension_reason_without_other(
-    records: Iterable[SuspensionRecord],
-) -> frozendict[int, frozendict[SuspensionReason, int]]:
-    result: dict[int, dict[SuspensionReason, int]] = defaultdict(
-        lambda: defaultdict(int)
-    )
-
-    for record in records:
-        result[record.year][record.suspension_reason] += record.count
-    
-    year_list = []
-    for _result in result:
-        year_list.append(_result)
-
-    for year in year_list:
-        del result[year][SuspensionReason.OTHER]
-        
-    return frozendict(result)
+    return _sum_records_divided_by(records, lambda record: record.suspension_reason)

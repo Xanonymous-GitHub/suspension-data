@@ -1,10 +1,7 @@
-import sys
-sys.path.append("../")
-
 from itertools import product
 from typing import Final
 
-# from sklearn.model_selection import train_test_split
+from sklearn.model_selection import train_test_split
 
 from suspension_data.calculation import (
     sum_records,
@@ -12,17 +9,16 @@ from suspension_data.calculation import (
     sum_records_divide_gender,
     sum_records_divide_school_type,
     sum_records_divide_suspension_reason,
-    sum_records_divide_suspension_reason_without_other,
 )
 from suspension_data.constants import DATA_SOURCE_LOCATION
 from suspension_data.dto import SuspensionCsvDto
 from suspension_data.enums import EducationProgram, Gender, SchoolType, SuspensionReason
 from suspension_data.models import SuspensionRecord
-# from suspension_data.predict import (
-#     predict_from_model,
-#     split_data,
-#     train_model_and_evaluate,
-# )
+from suspension_data.predict import (
+    predict_from_model,
+    split_data,
+    train_model_and_evaluate,
+)
 from suspension_data.visualize import (
     plot_data,
     plot_education_program_data,
@@ -66,46 +62,45 @@ def visualize(records: tuple[SuspensionRecord]):
     )
     plot_education_program_data(education_program_separated_record_dict)
 
-    education_suspension_reason_separated_record_dict = sum_records_divide_suspension_reason(
+    suspension_reason_separated_record_dict = sum_records_divide_suspension_reason(
         records
     )
-    plot_suspensions_reason_data(education_suspension_reason_separated_record_dict)
+    plot_suspensions_reason_data(suspension_reason_separated_record_dict)
 
-    education_suspension_reason_separated_record_without_other_dict = sum_records_divide_suspension_reason_without_other(
-        records
+
+def predict(records: tuple[SuspensionRecord]):
+    features, targets = split_data(records)
+
+    model_data_sources = train_test_split(
+        features, targets, test_size=0.1, random_state=42
     )
-    plot_suspensions_reason_data(education_suspension_reason_separated_record_without_other_dict)
 
+    model, result = train_model_and_evaluate(*model_data_sources)
+    print(model, result)
 
-# def predict(records: tuple[SuspensionRecord]):
-#     features, targets = split_data(records)
+    prediction_data = generate_train_data(
+        [Gender.BOY.index],
+        [SchoolType.PUBLIC.index],
+        EducationProgram.to_index_list(),
+        SuspensionReason.to_index_list(),
+        [111],
+    )
+    for data in prediction_data:
+        print(data)
+    print(len(prediction_data))
 
-#     model_data_sources = train_test_split(
-#         features, targets, test_size=0.1, random_state=42
-#     )
-
-#     model, result = train_model_and_evaluate(*model_data_sources)
-#     print(model, result)
-
-#     prediction_data = generate_train_data(
-#         [Gender.BOY.index],
-#         [SchoolType.PUBLIC.index],
-#         EducationProgram.to_index_list(),
-#         SuspensionReason.to_index_list(),
-#         [111],
-#     )
-#     for data in prediction_data:
-#         print(data)
-#     print(len(prediction_data))
-
-#     prediction_result = predict_from_model(model, prediction_data)
-#     print(prediction_result)
+    prediction_result = predict_from_model(model, prediction_data)
+    print(prediction_result)
 
 
 def start():
     records: Final[tuple[SuspensionRecord]] = read_csv_content()
-    visualize(records)
-    # predict(records)
+
+    try:
+        visualize(records)
+        predict(records)
+    except KeyboardInterrupt:
+        pass
 
 
 if __name__ == "__main__":

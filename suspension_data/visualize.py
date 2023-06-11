@@ -4,7 +4,12 @@ from matplotlib import rcParams
 from matplotlib.font_manager import fontManager
 
 from suspension_data.constants import ASSETS_LOCATION
-from suspension_data.enums.enums import EducationProgram, Gender, SchoolType, SuspensionReason
+from suspension_data.enums.enums import (
+    EducationProgram,
+    Gender,
+    SchoolType,
+    SuspensionReason,
+)
 
 fontManager.addfont(path=f"{ASSETS_LOCATION}/TaipeiSans.ttf")
 rcParams["font.family"] = "Taipei Sans TC Beta"
@@ -74,25 +79,29 @@ def plot_education_program_data(
     plt.ylabel("Number of Suspensions")
     plt.title("Suspensions by Education Program")
     plt.legend()
-    figManager = plt.get_current_fig_manager()
-    figManager.resize(1000, 800)
+    fig_manager = plt.get_current_fig_manager()
+    fig_manager.resize(1000, 800)
     plt.show()
+
 
 def plot_suspensions_reason_data(
     reason_separated_record_dict: frozendict[int, frozendict[SuspensionReason, int]]
 ) -> None:
     years = [*reason_separated_record_dict.keys()]
-    for suspens_reason in SuspensionReason:
+    for suspension_reason in SuspensionReason:
+        if suspension_reason == SuspensionReason.OTHER:
+            continue
+
         plt.plot(
             years,
-            [reason_separated_record_dict[year][suspens_reason] for year in years],
-            label=suspens_reason.value,
+            [reason_separated_record_dict[year][suspension_reason] for year in years],
+            label=suspension_reason.value,
         )
 
     plt.xlabel("Year")
     plt.ylabel("Number of Suspensions")
     plt.title("Suspensions by Suspension Reason")
     plt.legend()
-    figManager = plt.get_current_fig_manager()
-    figManager.resize(1000, 800)
+    fig_manager = plt.get_current_fig_manager()
+    fig_manager.resize(1000, 800)
     plt.show()
