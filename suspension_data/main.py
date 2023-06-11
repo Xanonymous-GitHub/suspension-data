@@ -34,20 +34,32 @@ def read_csv_content() -> tuple[SuspensionRecord]:
 
 
 def generate_train_data(
-    genders: list[Gender],
-    school_types: list[SchoolType],
-    education_programs: list[EducationProgram],
-    suspension_reasons: list[SuspensionReason],
-    years: list[int],
+        genders: list[Gender],
+        school_types: list[SchoolType],
+        education_programs: list[EducationProgram],
+        suspension_reasons: list[SuspensionReason],
+        years: list[int],
 ) -> tuple:
     return tuple(
         product(genders, school_types, education_programs, suspension_reasons, years)
     )
 
 
-def start():
-    records: Final[tuple[SuspensionRecord]] = read_csv_content()
+def visualize(records: tuple[SuspensionRecord]):
+    year_separated_record_dict = sum_records(records)
+    plot_data(year_separated_record_dict)
 
+    gender_separated_record_dict = sum_records_divide_gender(records)
+    plot_gender_data(gender_separated_record_dict)
+
+    school_type_separated_record_dict = sum_records_divide_school_type(records)
+    plot_school_type_data(school_type_separated_record_dict)
+
+    education_program_separated_record_dict = sum_records_divide_education_program(records)
+    plot_education_program_data(education_program_separated_record_dict)
+
+
+def predict(records: tuple[SuspensionRecord]):
     features, targets = split_data(records)
 
     model_data_sources = train_test_split(
@@ -71,17 +83,11 @@ def start():
     prediction_result = predict_from_model(model, prediction_data)
     print(prediction_result)
 
-    year_separated_record_dict = sum_records(records)
-    plot_data(year_separated_record_dict)
 
-    gender_separated_record_dict = sum_records_divide_gender(records)
-    plot_gender_data(gender_separated_record_dict)
-
-    school_type_separated_record_dict = sum_records_divide_school_type(records)
-    plot_school_type_data(school_type_separated_record_dict)
-
-    education_program_separated_record_dict = sum_records_divide_education_program(records)
-    plot_education_program_data(education_program_separated_record_dict)
+def start():
+    records: Final[tuple[SuspensionRecord]] = read_csv_content()
+    visualize(records)
+    predict(records)
 
 
 if __name__ == "__main__":
