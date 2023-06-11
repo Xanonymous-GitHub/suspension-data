@@ -32,7 +32,7 @@ def plot_gender_data(
     plt.plot(years, females, label="female")
     plt.xlabel("Year")
     plt.ylabel("Number of Suspensions")
-    plt.title("Suspensions by Year")
+    plt.title("Suspensions by Gender")
     plt.legend()
     plt.show()
 
@@ -53,7 +53,7 @@ def plot_school_type_data(
     plt.plot(years, privates, label="private")
     plt.xlabel("Year")
     plt.ylabel("Number of Suspensions")
-    plt.title("Suspensions by Year")
+    plt.title("Suspensions by School Type")
     plt.legend()
     plt.show()
 
@@ -72,6 +72,6 @@ def plot_education_program_data(
 
     plt.xlabel("Year")
     plt.ylabel("Number of Suspensions")
-    plt.title("Suspensions by Year")
+    plt.title("Suspensions by Education Program")
     plt.legend()
     plt.show()
