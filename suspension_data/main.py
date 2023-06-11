@@ -12,6 +12,7 @@ from suspension_data.calculation import (
     sum_records_divide_gender,
     sum_records_divide_school_type,
     sum_records_divide_suspension_reason,
+    sum_records_divide_suspension_reason_without_other,
 )
 from suspension_data.constants import DATA_SOURCE_LOCATION
 from suspension_data.dto import SuspensionCsvDto
@@ -69,6 +70,11 @@ def visualize(records: tuple[SuspensionRecord]):
         records
     )
     plot_suspensions_reason_data(education_suspension_reason_separated_record_dict)
+
+    education_suspension_reason_separated_record_without_other_dict = sum_records_divide_suspension_reason_without_other(
+        records
+    )
+    plot_suspensions_reason_data(education_suspension_reason_separated_record_without_other_dict)
 
 
 # def predict(records: tuple[SuspensionRecord]):

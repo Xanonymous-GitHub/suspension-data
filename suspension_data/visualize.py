@@ -82,7 +82,6 @@ def plot_suspensions_reason_data(
     reason_separated_record_dict: frozendict[int, frozendict[SuspensionReason, int]]
 ) -> None:
     years = [*reason_separated_record_dict.keys()]
-
     for suspens_reason in SuspensionReason:
         plt.plot(
             years,

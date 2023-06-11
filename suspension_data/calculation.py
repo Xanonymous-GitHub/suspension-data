@@ -61,3 +61,22 @@ def sum_records_divide_suspension_reason(
         result[record.year][record.suspension_reason] += record.count
 
     return frozendict(result)
+
+def sum_records_divide_suspension_reason_without_other(
+    records: Iterable[SuspensionRecord],
+) -> frozendict[int, frozendict[SuspensionReason, int]]:
+    result: dict[int, dict[SuspensionReason, int]] = defaultdict(
+        lambda: defaultdict(int)
+    )
+
+    for record in records:
+        result[record.year][record.suspension_reason] += record.count
+    
+    year_list = []
+    for _result in result:
+        year_list.append(_result)
+
+    for year in year_list:
+        del result[year][SuspensionReason.OTHER]
+        
+    return frozendict(result)
