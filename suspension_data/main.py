@@ -13,7 +13,7 @@ from suspension_data.constants import DATA_SOURCE_LOCATION
 from suspension_data.dto import SuspensionCsvDto
 from suspension_data.enums import EducationProgram, Gender, SchoolType, SuspensionReason
 from suspension_data.models import SuspensionRecord
-from suspension_data.models.predict import (
+from suspension_data.predict import (
     predict_from_model,
     split_data,
     train_model_and_evaluate,

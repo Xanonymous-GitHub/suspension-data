@@ -17,7 +17,7 @@ def sum_records(records: Iterable[SuspensionRecord]) -> frozendict[int, int]:
 
 
 def sum_records_divide_gender(
-    records: Iterable[SuspensionRecord],
+        records: Iterable[SuspensionRecord],
 ) -> frozendict[int, frozendict[Gender, int]]:
     result: dict[int, dict[Gender, int]] = defaultdict(lambda: defaultdict(int))
 
@@ -28,7 +28,7 @@ def sum_records_divide_gender(
 
 
 def sum_records_divide_school_type(
-    records: Iterable[SuspensionRecord],
+        records: Iterable[SuspensionRecord],
 ) -> frozendict[int, frozendict[SchoolType, int]]:
     result: dict[int, dict[SchoolType, int]] = defaultdict(lambda: defaultdict(int))
 
@@ -39,7 +39,7 @@ def sum_records_divide_school_type(
 
 
 def sum_records_divide_education_program(
-    records: Iterable[SuspensionRecord],
+        records: Iterable[SuspensionRecord],
 ) -> frozendict[int, frozendict[EducationProgram, int]]:
     result: dict[int, dict[EducationProgram, int]] = defaultdict(
         lambda: defaultdict(int)
